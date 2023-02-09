@@ -82,6 +82,7 @@ def has_cycle_util(G, node, marked, parent):
         if not marked[adj_node]:
             if has_cycle_util(G, adj_node, marked, node):
                 return True
+                
         elif adj_node != parent:
             return True
 
