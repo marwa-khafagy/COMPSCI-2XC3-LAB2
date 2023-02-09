@@ -204,3 +204,32 @@ def DFS3(G, node1):
 #
 #
 #
+
+
+def BFS3(G, node1):
+
+    Q = deque([node1])
+    predecessor = {}
+
+    # Mark Nodes
+    marked = {node1 : True}
+
+    while len(Q) > 0:
+
+        current_node = Q.popleft()
+
+        #Go over all possible nexts
+        for node in G.adj[current_node]:
+
+            #Mark if not already
+            if not marked.get(node, False): 
+
+                #Enqueue
+                marked[node] = True
+                Q.append(node)
+
+                #Mark my prececessor
+                predecessor[node] = current_node
+                
+
+    return predecessor
