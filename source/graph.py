@@ -1,6 +1,8 @@
 from collections import deque
 
-#Undirected graph using an adjacency list
+# Undirected graph using an adjacency list
+
+
 class Graph:
 
     def __init__(self, n):
@@ -26,10 +28,10 @@ class Graph:
         return len()
 
 
-#Breadth First Search
+# Breadth First Search
 def BFS(G, node1, node2):
     Q = deque([node1])
-    marked = {node1 : True}
+    marked = {node1: True}
     for node in G.adj:
         if node != node1:
             marked[node] = False
@@ -44,7 +46,7 @@ def BFS(G, node1, node2):
     return False
 
 
-#Depth First Search
+# Depth First Search
 def DFS(G, node1, node2):
     S = [node1]
     marked = {}
@@ -59,3 +61,46 @@ def DFS(G, node1, node2):
                     return True
                 S.append(node)
     return False
+
+
+def has_cycle(G):
+    marked = {}
+    for node in G.adj:
+        marked[node] = False
+    for node in G.adj:
+        if not marked[node]:
+            if has_cycle_util(G, node, marked, -1):
+                return True
+
+    return False
+
+
+def has_cycle_util(G, node, marked, parent):
+    marked[node] = True
+
+    for adj_node in G.adj[node]:
+        if not marked[adj_node]:
+            if has_cycle_util(G, adj_node, marked, node):
+                return True
+        elif adj_node != parent:
+            return True
+
+    return False
+
+
+def is_connected_util(G, node, marked):
+    marked[node] = True
+    for adj_node in G.adj[node]:
+        if not marked[adj_node]:
+            is_connected_util(G, adj_node, marked)
+    return marked
+
+
+def is_connected(G):
+    marked = {}
+
+    marked = [False]*len(G.adj)
+
+    marked = is_connected_util(G, 0, marked)
+
+    return all(marked[i] == True for i in range(len(marked)))
