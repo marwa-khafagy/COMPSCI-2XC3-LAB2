@@ -38,7 +38,7 @@ def BFS(G, node1, node2):
         for node in G.adj[current_node]:
             if node == node2:
                 return True
-            if not marked[node]:
+            if not marked[node]: 
                 Q.append(node)
                 marked[node] = True
     return False
