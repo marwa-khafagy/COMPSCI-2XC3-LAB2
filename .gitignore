@@ -6,6 +6,6 @@ main.log
 main.synctex.gz
 main.xdv
 main.synctex
-source/__pycache__
-source/__pycache__/graph.cpython-39.pyc
-source/tests.py
+code/__pycache__
+code/__pycache__/graph.cpython-39.pyc
+code/tests.py
