@@ -4,6 +4,7 @@ import random
 
 #Breadth First Search (TA added the comments as hints)
 def BFS(G, node1, node2):
+    path = []
     Q = deque([node1])
     marked = {node1 : True}
     for node in G.adj:
