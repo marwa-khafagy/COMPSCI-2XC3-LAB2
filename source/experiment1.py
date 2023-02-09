@@ -171,8 +171,11 @@ if (__name__ == "__main__"):
     
     #proportionality_test(100, 100, 1000)
 
-
-    edge_additions_until_cycle_test(range(100), 100)
+    #Good Basis
+    #edge_additions_until_cycle_test(range(100), 100)
 
     #Low Rest
-    edge_additions_until_cycle_test(range(5), 100)
+    #edge_additions_until_cycle_test(range(5), 100)
+
+    #Low Trial Basis
+    edge_additions_until_cycle_test(range(1000), 5)
