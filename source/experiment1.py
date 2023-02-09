@@ -36,6 +36,10 @@ def add_random_edge(G):
 
     i = G.number_of_nodes();
 
+    #Can't Add Edges between nodes that don't exist
+    if (i == 0):
+        return False
+
     while True:
         #Generate Position
         x = random.randint(0,i-1)
@@ -43,7 +47,7 @@ def add_random_edge(G):
 
         if not G.are_connected(x,y):
             G.add_edge(x, y)
-            break
+            return True
 
 #
 def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
@@ -89,9 +93,9 @@ def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
 #
 def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
     
-    edgeCountAverage = PlotGroup("", "#359cff")
-    minEdgeCountPerNodeCount = PlotGroup("Minimum Number Found", "#b4daff")
-    maxEdgeCountPerNodeCount = PlotGroup("Maximum Number Found", "#d4b4ff")
+    edgeCountAverage = PlotGroup("Mean Edge Additions until Cycle", "#359cff")
+    minEdgeCountPerNodeCount = PlotGroup("Minimum Edge Additions until Cycle", "#b4daff")
+    maxEdgeCountPerNodeCount = PlotGroup("Maximum Edge Additions until Cycle", "#d4b4ff")
 
     for i in node_counts:
         
@@ -99,6 +103,7 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
         edgeCountSum = 0
         minEdgesAddedForCycle = None #Never will be more than this
         maxEdgesAddedForCycle = None
+        cycleFound = False
 
         #Repeat Trials
         for _ in range(trials_per_node_count):
@@ -107,17 +112,22 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
 
             #Have Counts
             countUntilCycle = 0
-            maximumPossibleEdgeCount = i*(i-1)/2;
+            maximumPossibleEdgeCount = i*(i+1)/2;
 
             #Loop Until Cycle Made
             while countUntilCycle < maximumPossibleEdgeCount:
                 
-                #Add Edge To Graph
-                add_random_edge(testGraph)
+                #Add Edge To Graph; Exit if couldn't
+                if not add_random_edge(testGraph):
+                    break
+
                 countUntilCycle += 1
+                
 
                 #Exit if Cycle was made
                 if has_cycle(testGraph):
+
+                    cycleFound = True
 
                     # Good to Know
                     minEdgesAddedForCycle = smin(minEdgesAddedForCycle, countUntilCycle)
@@ -129,13 +139,10 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
             #Add to Sum
             edgeCountSum += countUntilCycle
 
-        #Get Proportion
-        edgeCountAverage.add_point(i, edgeCountSum / trials_per_node_count);
-
-        if (minEdgeCountPerNodeCount != None):
-            minEdgeCountPerNodeCount.add_point(i, minEdgesAddedForCycle)
-
-        if (maxEdgeCountPerNodeCount != None):    
+        #Don't Plot if There was never a cycle found (e = 0)
+        if (cycleFound):
+            edgeCountAverage.add_point(i, edgeCountSum / trials_per_node_count);
+            minEdgeCountPerNodeCount.add_point(i, minEdgesAddedForCycle) 
             maxEdgeCountPerNodeCount.add_point(i, maxEdgesAddedForCycle)
         
         print(f"Plotted Point ({i},{edgeCountSum / trials_per_node_count}), m:{minEdgesAddedForCycle}, M:{maxEdgesAddedForCycle}.")
@@ -146,7 +153,7 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
     name = f"Number of Edge Additions to Create Cycle in Empty Graph, {trials_per_node_count} Trials"
     plot.title(name)
 
-    plot.xlabel("Random Graph Edge Count")
+    plot.xlabel("Random Graph Node Count")
     plot.ylabel("Percentage of Cyclical Graphs")
 
     edgeCountAverage.plot()
@@ -163,4 +170,9 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
 if (__name__ == "__main__"):
     
     #proportionality_test(100, 100, 1000)
+
+
     edge_additions_until_cycle_test(range(100), 100)
+
+    #Low Rest
+    edge_additions_until_cycle_test(range(5), 100)
