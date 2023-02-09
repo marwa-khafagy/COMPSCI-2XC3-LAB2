@@ -20,6 +20,12 @@ class Graph:
         self.adj[len(self.adj)] = []
 
     def add_edge(self, node1, node2):
+
+        #Only add self reference once
+        if (node1 == node2):
+            self.adj[node1].append(node1)
+            return
+
         if node1 not in self.adj[node2]:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
