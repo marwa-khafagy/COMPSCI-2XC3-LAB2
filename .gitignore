@@ -4,6 +4,7 @@ main.fdb_latexmk
 main.fls
 main.log
 main.synctex.gz
+main.synctex(busy)
 main.xdv
 main.synctex
 code/__pycache__
