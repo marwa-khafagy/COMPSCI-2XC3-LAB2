@@ -39,11 +39,12 @@ class PlotGroup:
 
         #Find When Y < 1
         while (lastYbiggerthan1 >= 0):
-            lastYbiggerthan1 -= 1
-
             #Found, Exit
-            if (self.ypoints[lastYbiggerthan1] < 1):
+
+            if (self.ypoints[lastYbiggerthan1-1] < 1):
                 break;
+
+            lastYbiggerthan1 -= 1
 
         #None Found, Therefor Always bigger than 1
         if lastYbiggerthan1 < 0:
@@ -51,4 +52,4 @@ class PlotGroup:
         
         #Get X
         x=self.xpoints[lastYbiggerthan1]
-        plot.axvline(x=x, color = '#BFBFBF', label=f'Always 1 after x={x}')
+        plot.axvline(x=x, color = '#BFBFBF', label=f'Always 1 at & after x={x}')

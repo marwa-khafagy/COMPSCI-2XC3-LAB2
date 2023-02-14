@@ -50,7 +50,7 @@ def add_random_edge(G):
             return True
 
 #
-def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
+def proportionality_test(const_node_count, max_edge_count, trial_count):
     
     #Plot
     amount = PlotGroup("Average Number of Cyclical Graphs")
@@ -62,7 +62,7 @@ def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
         cyclicalGraphCount = 0
 
         # Generate X Graphs
-        for _ in range(graph_sample_size):
+        for _ in range(trial_count):
 
             #Generate Random Graph
             sampleGraph = create_random_graph(const_node_count, e);
@@ -72,13 +72,13 @@ def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
                 cyclicalGraphCount += 1
 
         #Get Proportion
-        cyclicalAverageCount = cyclicalGraphCount / graph_sample_size
+        cyclicalAverageCount = cyclicalGraphCount / trial_count
         amount.add_point(e, cyclicalAverageCount)
 
         print(f"Plotted Point ({e},{cyclicalAverageCount}). ({e}/{max_edge_count})")
 
     # Plot Here
-    name = f"Percentage of Cyclical Graphs out of {graph_sample_size} Graphs with Node Count {const_node_count}"
+    name = f"Percentage of Cyclical Graphs out of {trial_count} Graphs with Node Count {const_node_count}"
     plot.title(name)
 
     plot.xlabel("Random Graph Edge Count")
@@ -89,6 +89,11 @@ def proportionality_test(const_node_count, max_edge_count, graph_sample_size):
     plot.legend()
     plot.show()
 
+#
+def max_proportionality_test(const_node_count, trial_count):
+
+    edgeCount = int((const_node_count*(const_node_count + 1)) / 2)
+    proportionality_test(const_node_count, edgeCount, trial_count)
 
 #
 def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
@@ -153,8 +158,8 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
     name = f"Number of Edge Additions to Create Cycle in Empty Graph, {trials_per_node_count} Trials"
     plot.title(name)
 
-    plot.xlabel("Random Graph Node Count")
-    plot.ylabel("Percentage of Cyclical Graphs")
+    plot.xlabel("Graph Node Count")
+    plot.ylabel("Edge Additions to creat cycle")
 
     edgeCountAverage.plot()
     minEdgeCountPerNodeCount.plot()
@@ -168,14 +173,21 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
 #
 
 if (__name__ == "__main__"):
+
+    #Proportionality For small(ish) graphs
+    # max_proportionality_test(5, 1000)
+    # max_proportionality_test(10, 1000)
+    # max_proportionality_test(30, 1000)
+
+    #At this point the amount of possible graphs become crazy
+    # proportionality_test(100, 500, 100)
+
     
-    #proportionality_test(100, 100, 1000)
+    #Low Rest
+    # edge_additions_until_cycle_test(range(5), 1000)
 
     #Good Basis
-    #edge_additions_until_cycle_test(range(100), 100)
+    # edge_additions_until_cycle_test(range(100), 1000)
 
-    #Low Rest
-    #edge_additions_until_cycle_test(range(5), 100)
-
-    #Low Trial Basis
-    edge_additions_until_cycle_test(range(1000), 5)
+    #Low Trial
+    edge_additions_until_cycle_test(range(0, 1000, 10), 10)
