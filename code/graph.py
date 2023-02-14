@@ -7,6 +7,7 @@ class Graph:
 
     def __init__(self, n):
         self.adj = {}
+        self.nodesWithEdges = {}
         for i in range(n):
             self.adj[i] = []
 
@@ -21,11 +22,20 @@ class Graph:
 
     def add_edge(self, node1, node2):
 
+        #Memoize
+        if not self.nodesWithEdges.get(node1, False):
+                self.nodesWithEdges[node1] = True;
+
         #Only add self reference once
         if (node1 == node2):
             self.adj[node1].append(node1)
             return
 
+        #Memoize Second
+        if not self.nodesWithEdges.get(node2, False):
+            self.nodesWithEdges[node2] = True;
+
+        #Add Otherwise
         if node1 not in self.adj[node2]:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
@@ -74,9 +84,11 @@ def DFS(G, node1, node2):
 
 def has_cycle(G):
     marked = {}
+
     for node in G.adj:
         marked[node] = False
-    for node in G.adj:
+        
+    for node in G.nodesWithEdges:
         if not marked[node]:
             if has_cycle_util(G, node, marked, -1):
                 return True
