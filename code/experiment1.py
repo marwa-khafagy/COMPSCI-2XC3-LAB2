@@ -174,13 +174,14 @@ def edge_additions_until_cycle_test(node_counts, trials_per_node_count):
 
 if (__name__ == "__main__"):
 
-    #Proportionality For small(ish) graphs
+    # Proportionality For small(ish) graphs
     # max_proportionality_test(5, 1000)
     # max_proportionality_test(10, 1000)
     # max_proportionality_test(30, 1000)
 
     #At this point the amount of possible graphs become crazy
-    # proportionality_test(100, 500, 100)
+    #max_proportionality_test(100, 100)
+    # proportionality_test(100, 1000, 100)
 
     
     #Low Rest
@@ -189,5 +190,8 @@ if (__name__ == "__main__"):
     #Good Basis
     # edge_additions_until_cycle_test(range(100), 1000)
 
-    #Low Trial
-    edge_additions_until_cycle_test(range(0, 1000, 10), 10)
+    #Low Average Trial
+    # edge_additions_until_cycle_test(range(0, 1000, 10), 10)
+
+    # High Range Trial, see behaviour
+    edge_additions_until_cycle_test(range(0, 10000, 500), 40)

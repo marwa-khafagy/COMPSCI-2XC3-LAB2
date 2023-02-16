@@ -23,8 +23,7 @@ class Graph:
     def add_edge(self, node1, node2):
 
         #Memoize
-        if not self.nodesWithEdges.get(node1, False):
-                self.nodesWithEdges[node1] = True;
+        self.nodesWithEdges[node1] = True;
 
         #Only add self reference once
         if (node1 == node2):
@@ -32,8 +31,7 @@ class Graph:
             return
 
         #Memoize Second
-        if not self.nodesWithEdges.get(node2, False):
-            self.nodesWithEdges[node2] = True;
+        self.nodesWithEdges[node2] = True;
 
         #Add Otherwise
         if node1 not in self.adj[node2]:
