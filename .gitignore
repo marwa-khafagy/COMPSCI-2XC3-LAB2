@@ -6,6 +6,9 @@ main.log
 main.synctex.gz
 main.synctex(busy)
 main.xdv
+main.lof
+main.out
+main.toc
 main.synctex
 code/__pycache__
 code/__pycache__/graph.cpython-39.pyc
