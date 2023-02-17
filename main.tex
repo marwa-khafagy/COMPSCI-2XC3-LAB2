@@ -205,6 +205,51 @@ Obviously, we see that the average number of edges need to create a cycle seems 
 \newpage
 \subsection{Experiment 2}
 
+
+\subsubsection{Test Outlines}
+
+Experiment 2 performs 2 types of tests, which act almost identically to the tests in Experiment 1.
+
+\subsubsection*{Proportionality Test}
+The first test, Proportionality, works as follows:
+
+\begin{itemize}
+    \item We create a random graph $G$ with constant $V$ nodes and $E$ amount of edges.
+    \item We check if $G$ is connected. If so, add to a count.
+    \item Repeat above $X$ times, and get the proportion of connected vs non-connected.
+    \item Repeat this entire process for a range of $E$.
+\end{itemize}
+
+\subsubsection*{Proportionality Test*}
+The next test, Proportionality Test* follows exactly from Proportionality Test, but does not allow for a definition of $E$. Instead, $E$ is calculated as
+
+\begin{center}
+    $E = \frac{V^2 + V}{2}$
+\end{center}
+
+This is the maximum number of edges that can be added to an undirected graph, with self loops. This way, we explore the range of all possible number of edge counts.
+
+This works best for small graphs, so that the edge count is not extraordinarily high.
+
+
+\subsubsection{Tests}
+
+As all the tests are proportionality tests, we define the inputs here.
+
+The first test conducted in Experiment 2 is a Proportionality Test*, on 1000 trials on graphs with 5 nodes.
+
+The second test is a Proportionality Test*, on 1000 trials on graphs with 10 nodes.
+
+Next, a Proportionality Test*, on 1000 trials on graphs with 30 nodes.
+
+Afterwards, we perform a regular Proportionality Test with 100 trials on graphs with 100 nodes. We define the max edge count to be 1000. Had we used the Proportionality* Test, we have a max edge count of 5050.
+
+And finally, we do a tests that show us how the connectivity falls off based on, same as in Experiment 1, $V$ nodes and $V$ edges. 
+The graph size will be 1000 nodes. The maximum number of edges will be 100\% of the number of nodes (1000 edges); doing only the edges that are a multiple of 5. We do 100 trials per edge count.
+
+
+\subsubsection{Proportionality Test Results and Conclusions}
+
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
 %
@@ -247,6 +292,21 @@ The function for each test is as follows.
 $ $
 \newline
 All the actual tests performed are outlined at the bottom on experiment1.py.
+\newline
+$ $
+\newline
+
+Experiment 2's tests are conducted in experiment2.py.
+The function for each test is as follows.
+\begin{itemize}
+    \item Proportionality Test = proportionality\_test\(\)
+    \item Proportionality Test* = max\_proportionality\_test\(\)
+\end{itemize}
+$ $
+\newline
+All the actual tests performed are outlined at the bottom on experiment2.py.
+
+
 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

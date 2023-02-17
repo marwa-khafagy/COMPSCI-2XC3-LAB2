@@ -7,14 +7,14 @@ import random
 from experiment1 import create_random_graph
 
 #
-def proportionality_test(const_node_count, max_edge_count, trial_count):
+def proportionality_test(const_node_count, max_edge_count, trial_count, skip_count = 1):
     
     #Plot
     amount = PlotGroup("Average Number of Cyclical Graphs")
     amount.placelineAtFirstY1 = True
 
     #How many Edges to create? (X axis)
-    for e in range(max_edge_count):
+    for e in range(0, max_edge_count, skip_count):
 
         cyclicalGraphCount = 0
 
@@ -59,11 +59,10 @@ def max_proportionality_test(const_node_count, trial_count):
 if (__name__ == "__main__"):
 
     # Proportionality For small(ish) graphs
-    test1 = max_proportionality_test(5, 1000)
-    test2 = max_proportionality_test(10, 1000)
-    test3 = max_proportionality_test(30, 1000)
+    # test1 = max_proportionality_test(5, 1000) # Edges = 15
+    # test2 = max_proportionality_test(10, 1000) # edges = 55
+    # test3 = proportionality_test(30, 250, 1000) #instead of 465
 
     #At this point the amount of possible graphs become crazy
-    #max_proportionality_test(100, 100)
-    test4 = proportionality_test(100, 1000, 100)
+    test4 = proportionality_test(1000, 1000, 100, 5)
 
