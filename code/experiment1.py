@@ -194,4 +194,4 @@ if (__name__ == "__main__"):
     #test7 = edge_additions_until_cycle_test(range(0, 1000, 10), 10)
 
     # High Range Trial, see behaviour
-    test8 =edge_additions_until_cycle_test(range(0, 10000, 500), 40)
+    test8 = edge_additions_until_cycle_test(range(0, 10000, 500), 40)
