@@ -25,6 +25,11 @@ def MVC(G): #minimum vertex cover
 
     return min_cover
 
+#------------------------------------------------------------------------------------------------
+#  HELPER FUNCTIONS
+#------------------------------------------------------------------------------------------------
+def generate_plot_dict():
+    return {'x': [], 'y' : []}
 
 #------------------------------------------------------------------------------------------------
 #  HELPER FUNCTIONS
@@ -61,6 +66,16 @@ def rand_edge_count(n):
     max = int((n*(n + 1)) / 2)
     return random.randint(0, max)
 
+def complement(l, max):
+    result = []
+
+    for i in range(max):
+        if i not in l:
+            result += [i]
+
+    return result
+
+
 #------------------------------------------------------------------------------------------------
 #  MIS FUNCTION 
 #------------------------------------------------------------------------------------------------
@@ -81,7 +96,8 @@ def MIS(G):
 
 def size_of_MIS_MVC_test(max_nodes,trail_count, skip):
 
-    p = PlotGroup("Sum of MIS and MVC")
+    mis_mvc = generate_plot_dict()
+    g = generate_plot_dict()
 
     for n in range(0, max_nodes, skip):
         sum = 0
@@ -89,19 +105,117 @@ def size_of_MIS_MVC_test(max_nodes,trail_count, skip):
             G = create_random_graph(n, rand_edge_count(n))
             sum += sum_of_MIS_MVC(G)
             # print("Num of Nodes: ", n, " Sum: ", sum_of_MIS_MVC(G), " Total: ", sum)
-        p.add_point(n, sum/trail_count)
+        
+        mis_mvc['x'].append(n)
+        g['x'].append(n)
+
+        mis_mvc['y'].append(sum/trail_count)
+        g['y'].append(G.number_of_nodes())
+            
         print(f"Plotted Point ({n},{sum/trail_count})")
     
-    name = f"Relationship Between Size of MIS and MVC"#({trail_count} trials)"
+    name = f"Relationship Between Size of MIS and MVC({trail_count} trials)"
     plot.title(name)
 
     plot.xlabel("Graph size (in vertices)")
-    plot.ylabel("Sum of MIS and MVC")
+    plot.ylabel("Number of Nodes")
 
-    p.plot()
+    plot.plot(g['x'], g['y'], label="MVC", color='k')
+    plot.plot(mis_mvc['x'], mis_mvc['y'], label="Nodes in Graph", color='y', linestyle="dashed")
+
 
     plot.legend()
     plot.show()
+    
+def len_comp_MVC(max_nodes,trials, skip):
+
+    len_of_comp_of_mvc = generate_plot_dict()
+    len_of_mvc = generate_plot_dict()
+    len_of_mis = generate_plot_dict()
+
+    for n in range(0, max_nodes, skip):
+
+        avg_mis = 0
+        avg_mvc = 0
+
+        for _ in range(trials):     
+            G = create_random_graph(n, rand_edge_count(n))
+            temp = MVC(G)
+            if not is_ind_set(complement(temp, G.number_of_nodes()), G): 
+                raise Exception("The complement of this MVC is not a MIS")
+            temp_mis = len_MIS(G)
+            temp_mvc = len(temp)
+            avg_mvc += temp_mvc
+            avg_mis += temp_mis
+
+        len_of_comp_of_mvc['x'].append(n)
+        len_of_mis['x'].append(n)
+        len_of_mvc['x'].append(n)
+
+        len_of_comp_of_mvc['y'].append(G.number_of_nodes() - avg_mvc / trials)
+        len_of_mis['y'].append(avg_mis / trials)
+        len_of_mvc['y'].append(avg_mvc / trials)
+
+        print(f"Plotted Point ({n},{avg_mis / trials})")
+    
+    name = f"MVC and It's Complement({trials} trials)"
+    plot.title(name)
+
+    plot.xlabel("Graph size (in vertices)")
+    plot.ylabel("Set Cardinality")
+
+    plot.plot(len_of_mis['x'], len_of_mis['y'], label="MIS", color='k')
+    plot.plot(len_of_mvc['x'], len_of_mvc['y'], label="MVC")
+    plot.plot(len_of_comp_of_mvc['x'], len_of_comp_of_mvc['y'], label="Complement of MVC", linestyle='dashed', color='y')
+   
+    plot.legend()
+    plot.show()
+
+
+def len_comp_MIS(max_nodes,trials, skip):
+
+    len_of_comp_of_mis = generate_plot_dict()
+    len_of_mvc = generate_plot_dict()
+    len_of_mis = generate_plot_dict()
+
+    for n in range(0, max_nodes, skip):
+
+        avg_mis = 0
+        avg_mvc = 0
+
+        for _ in range(trials):     
+            G = create_random_graph(n, rand_edge_count(n))
+            temp = MIS(G)
+            if not is_vertex_cover(complement(temp, G.number_of_nodes()), G): 
+                raise Exception("The complement of this MVC is not a MIS")
+            temp_mis = len(temp)
+            temp_mvc = len_MVC(G)
+            avg_mvc += temp_mvc
+            avg_mis += temp_mis
+
+        len_of_comp_of_mis['x'].append(n)
+        len_of_mis['x'].append(n)
+        len_of_mvc['x'].append(n)
+
+        len_of_comp_of_mis['y'].append(G.number_of_nodes() - avg_mis / trials)
+        len_of_mis['y'].append(avg_mis / trials)
+        len_of_mvc['y'].append(avg_mvc / trials)
+
+        print(f"Plotted Point ({n},{avg_mis / trials})")
+    
+    name = f"MIS and It's Complement({trials} trials)"
+    plot.title(name)
+
+    plot.xlabel("Graph size (in vertices)")
+    plot.ylabel("Set Cardinality")
+
+    plot.plot(len_of_mis['x'], len_of_mis['y'], label="MIS")
+    plot.plot(len_of_mvc['x'], len_of_mvc['y'], label="MVC", color='k')
+    plot.plot(len_of_comp_of_mis['x'], len_of_comp_of_mis['y'], label="Complement of MIS", linestyle='dashed', color='y')
+   
+    plot.legend()
+    plot.show()
+
 
 # in this one, show that every element in MIS not in MVC and vice versa
 
@@ -109,25 +223,48 @@ def size_of_MIS_MVC_test(max_nodes,trail_count, skip):
 #  TESTS
 #------------------------------------------------------------------------------------------------
 
-G1 = Graph(2)
-G1.add_edge(1, 0)
-G1.add_edge(1, 1)
+# G1 = Graph(5)
+# G1.add_edge(0, 1)
+# G1.add_edge(0, 2)
+# G1.add_edge(0, 3)
+# G1.add_edge(0, 4)
 
-G2 = Graph(10)
-G2.add_edge(0, 1)
-G2.add_edge(0, 4)
-G2.add_edge(0, 7)
-G2.add_edge(1, 2)
-G2.add_edge(2, 3)
-G2.add_edge(4, 5)
-G2.add_edge(5, 6)
-G2.add_edge(7, 8)
-G2.add_edge(8, 9)
+# G1.add_edge(1, 3)
 
-print(MIS(G2))
-print(MVC(G2))
+# G1.add_edge(2, 3)
+# G1.add_edge(2, 4)
 
-print(sum_of_MIS_MVC(G2))
+# print(MIS(G1))
+# print(MVC(G1))
 
+# G2 = Graph(10)
+# G2.add_edge(0, 1)
+# G2.add_edge(0, 4)
+# G2.add_edge(0, 7)
+# G2.add_edge(1, 2)
+# G2.add_edge(2, 3)
+# G2.add_edge(4, 5)
+# G2.add_edge(5, 6)
+# G2.add_edge(7, 8)
+# G2.add_edge(8, 9)
 
-test1 = size_of_MIS_MVC_test(25, 1, 1)
+# print(MIS(G2))
+# print(MVC(G2))
+
+# print(sum_of_MIS_MVC(G2))
+
+print("------------------------------------------------------------------------")
+print("Test 1:")
+test1 = size_of_MIS_MVC_test(25, 5, 1)
+print("Test 1 Done")
+print("------------------------------------------------------------------------")
+
+print("Test 2:")
+test1 = len_comp_MVC(25,5, 1)
+print("Test 2 Done")
+print("------------------------------------------------------------------------")
+
+print("Test 3:")
+test1 = len_comp_MIS(25,5, 1)
+print("Test 3 Done")
+print("------------------------------------------------------------------------")
