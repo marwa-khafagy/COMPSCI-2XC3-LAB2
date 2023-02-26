@@ -103,6 +103,8 @@ def size_of_MIS_MVC_test(max_nodes,trail_count, skip):
     plot.legend()
     plot.show()
 
+# in this one, show that every element in MIS not in MVC and vice versa
+
 #------------------------------------------------------------------------------------------------
 #  TESTS
 #------------------------------------------------------------------------------------------------
