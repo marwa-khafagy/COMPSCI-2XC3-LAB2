@@ -59,10 +59,6 @@ def max_proportionality_test(const_node_count, trial_count):
 if (__name__ == "__main__"):
 
     # Proportionality For small(ish) graphs
-    # test1 = max_proportionality_test(5, 1000) # Edges = 15
-    # test2 = max_proportionality_test(10, 1000) # edges = 55
-    # test3 = proportionality_test(30, 250, 1000) #instead of 465
-
-    #At this point the amount of possible graphs become crazy
-    test4 = proportionality_test(1000, 1000, 100, 5)
-
+    test1 = max_proportionality_test(5, 1000) # Edges = 15
+    test2 = max_proportionality_test(10, 1000) # edges = 55
+    test3 = proportionality_test(30, 250, 1000) #instead of 465
