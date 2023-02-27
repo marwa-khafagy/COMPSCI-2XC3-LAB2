@@ -184,7 +184,7 @@ What we can conclude is that if we have a graph with $V$ nodes and $V$ edges, we
 \firgureBuffered{images/experiment1/exp1_e.png}{Addition Test on graph sizes 0--5}
 \firgureBuffered{images/experiment1/exp1_f.png}{Addition Test on graph sizes 0--100}
 \firgureBuffered{images/experiment1/exp1_g.png}{Addition Test on graph sizes 0--1000, skipping 10.}
-\firgureBuffered{images/experiment1/exp1_h.png}{Addition Test on graph sizes 0-10000, skipping 500.}
+% \firgureBuffered{images/experiment1/exp1_h.png}{Addition Test on graph sizes 0-10000, skipping 500.}
 \FloatBarrier{}
 
 What we can conclude here is very similar to the conclusions we made in the proportionality tests.
@@ -270,7 +270,126 @@ The graph size will be 1000 nodes. The maximum number of edges will be 100\% of 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 \newpage
 \section{Part 2}
-\subsection{Experiment3}
+\subsection{Approximation Experiments}
+
+\subsubsection{Test Outlines}
+
+The approximation experiments conducts three different experiments to test the effectiveness of the three approximation algorithms given on different types of graphs.
+
+\subsubsection{Peformance by Number of Nodes Test}
+
+The first experiement will test the performance of the three approximation algorithms by the number of nodes in the graph.
+
+The first experiment is as follows: 
+
+\begin{itemize}
+    \item Create a graph with $V$ nodes and $E$ edges where $E = \frac{V^2 + V}{2}$. This is the maximum number of edges that can be added to an undirected graph, with self loops.
+    \item Run the three approximation algorithms (as well as the Minimum Vertex Cover algorithm) on the graph 1000 times, taking the sum of the size of the VC set for each algorithm.
+    \item Repeat this process for $V$ ranging from 1 to 24, in increments of 1. (A larger range would take too long to run.)
+    \item Plot the ratio between the sum of the size of the VC set for each algorithm and the sum of the size of the VC set for the Minimum Vertex Cover algorithm.
+\end{itemize}
+\newpage
+\subsubsection{Performance by Number of Nodes Results and Conclusions}
+
+\FloatBarrier{}
+\firgureBuffered{images/approxexperiments/Nodes.png}{Performance of Approximation by Number of Nodes}
+\FloatBarrier{}
+
+We can see from the graph above that was the number of nodes increases, the approximation algorithms get closer to the optimal solution. However, Approximation 1 is the most accurate in that it relatively consistently is able to compute the minimum vertex cover, save for a few spikes (which are still very close to the actual minimum vertex cover). This is expected since it is the only approximation algorithm that computes the MVC with a strategy, rather than randomness like the other 2. \\
+
+Approximation 3 has a big jump as the beginning (much higher than Approximation 2), but decreaes as soon as the number of node increases. Approximation 2 and 3 consistently have an extremely similar ratio after about 7 nodes and get very close to the actual MVC after 20 nodes. Finding the ratio for more nodes is possible but would take a very long time to run since to find the actual MVC, the power set must be computed which takes $O(2^V)$ time. \\
+
+\subsubsection{Performance by Number of Edges Test}
+
+The second experiment will test the performance of the three approximation algorithms by the number of edges in the graph.
+
+The second experiment is as follows:
+
+\begin{itemize}
+    \item Create a graph with $25$ nodes and $E$ edges.
+    \item Run the three approximation algorithms (as well as the Minimum Vertex Cover algorithm) on the graph 1000 times, taking the sum of the size of the VC set for each algorithm.
+    \item Repeat this process for $E$ ranging from 1 to 196, in increments of 5. (A larger range would take too long to run.)
+    \item Plot the ratio between the sum of the size of the VC set for each algorithm and the sum of the size of the VC set for the Minimum Vertex Cover algorithm.
+\end{itemize}
+\newpage
+\subsubsection{Performance by Number of Edges Results and Conclusions}
+
+\FloatBarrier{}
+\firgureBuffered{images/approxexperiments/Edges.png}{Performance of Approximation by Number of Edges}
+\FloatBarrier{}
+
+We can see from the graph above, that as the number of edges increases, the approximation algorithms get closer to the optimal solution, similarly to the first experiment. Approximation 1 is still the best approximation algorithm regardless of the number of edges as it is the only one that computes the MVC with a strategy.
+
+Approximation 2 and 3 initially are very far off from the MVC, with approximation 2 and 3 having a ratio of about 3.1 and 2, respectively. Approximation 2 may take so much longer because it works by selecting nodes (which remain constant), rather than selecting edges like Approximation 3 does since the number of edges is the variable which changes. \\
+
+However, as the number of edges increases, Approximation 2 and 3 get closer and closer to the actual MVC. Approximation 2 and 3 have a ratio of $<1.1$ after 190 edges. \\
+
+\subsubsection{Performance by size of Tree Test}
+
+The third experiment is different in that it will test the performance of the three approximation algorithms on tree graphs with a varying number of nodes. Formally in Graph Theory, a tree is a connected acyclic undirected graph. \\
+
+The third experiment is as follows:
+
+\begin{itemize}
+    \item Create a tree with $V$ nodes and $E$ edges where $E = V-1$. This is the maximum number of edges that can be added to a tree.
+    \item Run the three approximation algorithms (as well as the Minimum Vertex Cover algorithm) on the graph 1000 times, taking the sum of the size of the VC set for each algorithm.
+    \item Repeat this process for $V$ ranging from 1 to 24, in increments of 1. (A larger range would take too long to run.)
+    \item Plot the ratio between the sum of the size of the VC set for each algorithm and the sum of the size of the VC set for the Minimum Vertex Cover algorithm.
+\end{itemize}
+\newpage
+\subsubsection{Performance by size of Tree Results and Conclusions}
+
+\FloatBarrier{}
+\firgureBuffered{images/approxexperiments/Tree1.png}{Performance of Approximation by Size of Tree}
+\FloatBarrier{}
+
+This experiment yields some extremely interesting results.
+
+For Approximation 1, it consistently computes the minimum vertex cover for all tree graphs, save for a few spikes. These are the same results as the first and secondexperiment. \\
+
+The ratio for Approximation 2 seems to be increasing as the number of nodes increases. This is extremely different from experiment 1, where the ratio was decreasing as the number of nodes increased. By extrapolating, we can see that if more nodes were to be added, the ratio would keep increasing. The tree property of these graphs seems to make the algorithm perform worse.\\
+
+Approximation 3 appears to stay consistently around a ratio of 1.7 after 10 nodes, and before 10 nodes is consistently around a ratio of 1.9. If more nodes were to be added, the ratio would likely stay around 1.7. \\
+
+
+
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+%
+%
+%                       Executesive Summary Part 2
+%
+%
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+\newpage
+
+\section{Executive Summary Part 2}
+
+\subsection{Approximation Experiment by Number of Nodes}
+
+\begin{itemize}
+    \item Approximation 1 performs the best out of the three approximation algorithms. It consistently computes the minimum vertex cover for all graphs with a varying number of nodes.
+    \item Approximation 1 may perform the best because it computes the minimum vertex cover with a strategy, rather than randomness like the other two approximation algorithms.
+    \item Approximation 2 and 3 consistently have an extremely similar ratio after about 7 nodes and get very close to the actual MVC after 20 nodes.
+\end{itemize}
+
+\subsection{Approximation Experiment by Number of Edges}
+
+\begin{itemize}
+    \item Approximation 1 is still the best approximation algorithm regardless of the number of edges as it is the only one that computes the MVC with a strategy.
+    \item Approximation 2 and 3 initially are very far off from the MVC, with approximation 2 and 3 having a ratio of about 3.1 and 2, respectively.
+    \item Approximation 2 and 3 have a ratio of $<1.1$ after 190 edges.
+    \item All approximation algorithms have a similar ratio after 190 edges.
+\end{itemize}
+
+\subsection{Approximation Experiment by Size of Tree}
+
+\begin{itemize}
+    \item Approximation 1 consistently computes the minimum vertex cover for all tree graphs, save for a few spikes.
+    \item The ratio for Approximation 2 seems to be increasing as the number of nodes increases. This is extremely different from experiment 1, where the ratio was decreasing as the number of nodes increased.
+    \item Approximation 3 appears to stay consistently around a ratio of 1.7 after 10 nodes, and before 10 nodes is consistently around a ratio of 1.9.
+\end{itemize}
+
 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
@@ -305,6 +424,22 @@ The function for each test is as follows.
 $ $
 \newline
 All the actual tests performed are outlined at the bottom on experiment2.py.
+\\
+\\
+
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+% Approximation Experiments appendix
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+The Approximation algorithms can be found in graph.py. \\
+The Approximation 1, 2, and 3's experiments are conducted in approxexp1.py.
+\\
+\begin{itemize}
+    \item Performance by Number of Nodes = approximation\_performance\_by\_edges\_tests\(\)
+    \item Performance by Number of Edges = approximation\_performance\_by\_edges\_tests\(\)
+    \item Performance by Size of Tree = approximation\_performance\_by\_trees\(\)
+\end{itemize}
+
 
 
 
