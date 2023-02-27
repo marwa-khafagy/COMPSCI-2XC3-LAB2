@@ -26,7 +26,7 @@ def MVC(G): #minimum vertex cover
     return min_cover
 
 #------------------------------------------------------------------------------------------------
-#  HELPER FUNCTIONS
+#  PLOTTING FUNCTIONS
 #------------------------------------------------------------------------------------------------
 def generate_plot_dict():
     return {'x': [], 'y' : []}
@@ -217,41 +217,9 @@ def len_comp_MIS(max_nodes,trials, skip):
     plot.show()
 
 
-# in this one, show that every element in MIS not in MVC and vice versa
-
 #------------------------------------------------------------------------------------------------
 #  TESTS
 #------------------------------------------------------------------------------------------------
-
-# G1 = Graph(5)
-# G1.add_edge(0, 1)
-# G1.add_edge(0, 2)
-# G1.add_edge(0, 3)
-# G1.add_edge(0, 4)
-
-# G1.add_edge(1, 3)
-
-# G1.add_edge(2, 3)
-# G1.add_edge(2, 4)
-
-# print(MIS(G1))
-# print(MVC(G1))
-
-# G2 = Graph(10)
-# G2.add_edge(0, 1)
-# G2.add_edge(0, 4)
-# G2.add_edge(0, 7)
-# G2.add_edge(1, 2)
-# G2.add_edge(2, 3)
-# G2.add_edge(4, 5)
-# G2.add_edge(5, 6)
-# G2.add_edge(7, 8)
-# G2.add_edge(8, 9)
-
-# print(MIS(G2))
-# print(MVC(G2))
-
-# print(sum_of_MIS_MVC(G2))
 
 print("------------------------------------------------------------------------")
 print("Test 1:")
@@ -260,11 +228,11 @@ print("Test 1 Done")
 print("------------------------------------------------------------------------")
 
 print("Test 2:")
-test1 = len_comp_MVC(25,5, 1)
+test2 = len_comp_MVC(25,5, 1)
 print("Test 2 Done")
 print("------------------------------------------------------------------------")
 
 print("Test 3:")
-test1 = len_comp_MIS(25,5, 1)
+test3 = len_comp_MIS(25,5, 1)
 print("Test 3 Done")
 print("------------------------------------------------------------------------")
