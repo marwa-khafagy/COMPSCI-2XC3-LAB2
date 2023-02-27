@@ -250,12 +250,7 @@ The first test conducted in Experiment 2 is a Proportionality Test*, on 1000 tri
 
 The second test is a Proportionality Test*, on 1000 trials on graphs with 10 nodes.
 
-Next, a Proportionality Test*, on 1000 trials on graphs with 30 nodes.
-
-Afterwards, we perform a regular Proportionality Test with 100 trials on graphs with 100 nodes. We define the max edge count to be 1000. Had we used the Proportionality* Test, we have a max edge count of 5050.
-
-And finally, we do a tests that show us how the connectivity falls off based on, same as in Experiment 1, $V$ nodes and $V$ edges. 
-The graph size will be 1000 nodes. The maximum number of edges will be 100\% of the number of nodes (1000 edges); doing only the edges that are a multiple of 5. We do 100 trials per edge count.
+Finally, a Proportionality Test*, on 1000 trials on graphs with 30 nodes.
 
 \subsubsection{Proportionality Test Results and Conclusions}
 
@@ -267,21 +262,20 @@ The graph size will be 1000 nodes. The maximum number of edges will be 100\% of 
 
 To come up with an equation, we think about how we can create a connected graph, or rather, at what edge case the graph would have to be in order for it to still be NOT connected.
 
-Imagine a graph with every possible edge added to it. We have already stated that the number of edges
+Imagine a graph with every possible edge added to it. We have already stated that the number of edges in this graph would be
 \begin{center}
     $E = \frac{V^2 + V}{2}$
 \end{center}
 
-Now we think how to force the graph to be un connected. To do this, we pick some node and remove every connected to it. Since, in our graph, every
-node is connected to the other $V-1$ nodes, we can remove those $V-1$ connections.
+Now we think how to force our graph to be disconnected. To do this, we pick some node and remove every edge connected to it, save for the edge that connects to itself (which does not impact connectivity). Since, in our graph, every node is connected to the other $V-1$ nodes, we can remove those $V-1$ connections.
 
-This leaves us with our final graph, where every node is connected to every other node, save for one extra that is only connected to itself (which does not impact connectivity).
+This leaves us with our final graph, where every node is connected to every other node, save for one extra that is only connected to itself.
 
-To force the graph to be connected, we just add one more edge to the isolated node, which must then, by our definition, connect the entire graph.
+To force the graph to be connected, we just add one more edge coming from the isolated node to any other node, which must then, by our definition, connect the entire graph.
 
 Thus, our equation to find the amount of edges to force a connected node is
 \begin{center}
-    $E = \frac{V^2 + V}{2} - (V-1) + 1$
+    $E = \frac{V^2 + V}{2} - (V-1) + 1$\\
     $E = \frac{V^2 - V}{2} + 2$
 \end{center}
 
