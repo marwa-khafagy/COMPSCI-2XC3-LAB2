@@ -64,5 +64,6 @@ if (__name__ == "__main__"):
     # test3 = proportionality_test(30, 250, 1000) #instead of 465
 
     #At this point the amount of possible graphs become crazy
-    test4 = proportionality_test(1000, 1000, 100, 5)
+    test4 = proportionality_test(1000, 1000, 100, 50)
 
+    test5 = proportionality_test(1000, 10000, 100, 100)

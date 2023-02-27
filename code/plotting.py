@@ -47,7 +47,7 @@ class PlotGroup:
             lastYbiggerthan1 -= 1
 
         #None Found, Therefor Always bigger than 1
-        if lastYbiggerthan1 < 0:
+        if lastYbiggerthan1 <= 0 or lastYbiggerthan1 == self.count:
             return
         
         #Get X
