@@ -193,7 +193,6 @@ What we can conclude is that if we have a graph with $V$ nodes and $V$ edges, we
 \firgureBuffered{images/experiment1/exp1_e.png}{Addition Test on graph sizes 0--5}
 \firgureBuffered{images/experiment1/exp1_f.png}{Addition Test on graph sizes 0--100}
 \firgureBuffered{images/experiment1/exp1_g.png}{Addition Test on graph sizes 0--1000, skipping 10.}
-% \firgureBuffered{images/experiment1/exp1_h.png}{Addition Test on graph sizes 0-10000, skipping 500.}
 \FloatBarrier{}
 
 What we can conclude here is very similar to the conclusions we made in the proportionality tests.
@@ -553,7 +552,7 @@ All the actual tests performed are outlined at the bottom on IndependentSet.py.
       \item Approximation 2 and 3 consistently have an extremely similar ratio after about 7 nodes and get very close to the actual MVC after 20 nodes.
   \end{itemize}
   
-  \subsubsection{Approximation Experiment by Number of Edges}
+\subsubsection{Approximation Experiment by Number of Edges}
   
   \begin{itemize}
       \item Approximation 1 is still the best approximation algorithm regardless of the number of edges as it is the only one that computes the MVC with a strategy.
@@ -562,8 +561,7 @@ All the actual tests performed are outlined at the bottom on IndependentSet.py.
       \item All approximation algorithms have a similar ratio after 190 edges.
   \end{itemize}
   
-  \subsubsection{Approximation Experiment by Size of Tree}
-  
+\subsubsection{Approximation Experiment by Size of Tree}  
   \begin{itemize}
       \item Approximation 1 consistently computes the minimum vertex cover for all tree graphs, save for a few spikes.
       \item The ratio for Approximation 2 seems to be increasing as the number of nodes increases. This is extremely different from experiment 1, where the ratio was decreasing as the number of nodes increased.
