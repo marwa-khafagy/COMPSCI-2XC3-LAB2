@@ -295,16 +295,6 @@ This could be improved upon by performing many more trials, or by actually creat
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
 %
-%                       EXPERIMENT 2
-%
-%
-%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-\newpage
-\subsection{Executive Summary}
-
-%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%
-%
 %                       EXPERIMENT 3
 %
 %
@@ -417,9 +407,25 @@ $ $
 All the actual tests performed are outlined at the bottom on experiment2.py.
 
 
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\newpage
+\section{Executive Summary}
+
+\subsubsection{Experiment 1}
+\begin{itemize}
+    \item The smallest number of edges needed to be added to a graph to create a cycle is 1 (a self loop)
+    \item It would require at most $V$ number of edges added to force a cycle to be created in a graph (worst case) 
+  \end{itemize}
+
+\subsubsection{Experiment 2}
+\begin{itemize}
+    \item The smallest number of edges needed to force a cycle to be connected would be obviously $V$ (best case, where we create one large cycle).
+    \item It would require at most $\frac{V^2 - V}{2} + 2$ number of edges added to force a cycle to be connected in a graph (worst case) 
+  \end{itemize}
+
+\subsubsection{Independent Set Problem}
 
 \end{document}
