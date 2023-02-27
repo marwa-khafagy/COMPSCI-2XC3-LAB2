@@ -275,6 +275,85 @@ The graph size will be 1000 nodes. The maximum number of edges will be 100\% of 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
 %
+%                       EXPERIMENT 3
+%
+%
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\newpage
+\subsection{The Independent Set Problem}
+In this experiment, we performed tests to empircally find the relationship between the maximum 
+independent set (MIS) and the minimum vertex cover (MVC) of an undirected graph.
+
+\subsubsection{Test Outlines}
+
+In the first test we ran, we graphed the sum of the cardinalities of MIS and MVC.
+
+This first test, works as follows:
+
+\begin{itemize}
+    \item We create a random graph $G$ with $n$ nodes and some randomly generated edges $E$
+    \item We find the cardinality of MIS
+    \item We find the cardinality of MVC
+    \item We sum these two cardinalities 
+    \item Repeat this process for $x$ amount of trials (we chose 5 trials)
+    \item We average the sum of these two cardinalities and plot it 
+    \item Repeat this entire process for a range of graph sizes (we chose to go up to graphs with 25 nodes)
+\end{itemize}
+
+In the second test we ran, we graphed cardinalities of MIS, MVC and the complement of MVC.
+
+This second test, works as follows:
+
+\begin{itemize}
+    \item We create a random graph $G$ with $n$ nodes and some randomly generated edges $E$
+    \item We find the cardinality of MIS
+    \item We find the cardinality of MVC
+    \item We check if the complement of MVC is an independent set, raising an exception if it is not
+    \item Repeat this process for $x$ amount of trials (we chose 5 trials)
+    \item We plot the averages of cardinality of MIS, MVC, and we also plot the cardinality of the complement of MVC
+    \item Repeat this entire process for a range of graph sizes (we chose to go up to graphs with 25 nodes)
+\end{itemize}
+
+In the third test we ran, we graphed cardinalities of MIS, MVC and the complement of MIS.
+
+This second test, works as follows:
+
+\begin{itemize}
+    \item We create a random graph $G$ with $n$ nodes and some randomly generated edges $E$
+    \item We find the cardinality of MIS
+    \item We find the cardinality of MVC
+    \item We check if the complement of MIS is a vertex cover, raising an exception if it is not
+    \item Repeat this process for $x$ amount of trials (we chose 5 trials)
+    \item We plot the averages of cardinality of MIS, MVC, and we also plot the cardinality of the complement of MIS
+    \item Repeat this entire process for a range of graph sizes (we chose to go up to graphs with 25 nodes)
+\end{itemize}
+
+
+\subsubsection{Test Results}
+
+\FloatBarrier{}
+\firgureBuffered{images/IndSet/Figure_1.png}{Test 1}
+\firgureBuffered{images/IndSet/Figure_2.png}{Test 2}
+\firgureBuffered{images/IndSet/Figure_3.png}{Test 3}
+\FloatBarrier{}
+
+\subsubsection{Conclusions}
+Upon performing the first test, we found that the sum of the cardinalities of MIS and MVC are always equal
+to the number of nodes in the graph. 
+
+Through the second test we found that the complement of MVC has the same cardinality of a MIS, and is an independent set.
+
+Through the third test we found that the complement of MIS has the same cardinality of a MVC, and is a vertex cover.
+
+In conclusion, these three tests show empircally that the complement of a MVC is a MIS, and vise versa. Thus, given a MIS, 
+one can find a MIS (and vise versa). We also note that there may exists more than one MIS/MVC for a given graph, so checking 
+to see if the complement of MVC is equal to a given MIS may return false. 
+
+
+
+%=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+%
+%
 %                       APPENDIX
 %
 %
