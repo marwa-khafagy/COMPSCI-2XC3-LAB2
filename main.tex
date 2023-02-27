@@ -41,6 +41,15 @@
     \end{figure}
 }
 
+\newcommand{\figureSmaller}[2]
+{
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[width=1\textwidth,scale=0.5]{#1}
+        \caption{#2}
+    \end{figure}
+}
+
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 % Hide Numbers on Sections
@@ -210,26 +219,27 @@ Obviously, we see that the average number of edges need to create a cycle seems 
 
 Experiment 2 performs 2 types of tests, which act almost identically to the tests in Experiment 1.
 
-\subsubsection*{Proportionality Test}
-The first test, Proportionality, works as follows:
+\subsubsection*{Proportionality* Test}
+The style of test Proportionality*, works as follows:
+
+We define $E'$ as a `constant', where $E'$ is defined as
+\begin{center}
+    $E' = \frac{V^2 + V}{2}$
+\end{center}
+
+Where $V$ is the number of nodes in the graph.
 
 \begin{itemize}
     \item We create a random graph $G$ with constant $V$ nodes and $E$ amount of edges.
     \item We check if $G$ is connected. If so, add to a count.
     \item Repeat above $X$ times, and get the proportion of connected vs non-connected.
-    \item Repeat this entire process for a range of $E$.
+    \item Repeat this entire process for $E$ between the range of 0 to $E'$.
 \end{itemize}
 
-\subsubsection*{Proportionality Test*}
-The next test, Proportionality Test* follows exactly from Proportionality Test, but does not allow for a definition of $E$. Instead, $E$ is calculated as
-
-\begin{center}
-    $E = \frac{V^2 + V}{2}$
-\end{center}
 
 This is the maximum number of edges that can be added to an undirected graph, with self loops. This way, we explore the range of all possible number of edge counts.
 
-This works best for small graphs, so that the edge count is not extraordinarily high.
+This works best for small graphs, so that the edge count is not extraordinarily high. For larger graphs we use the unstarred Proportionality test.
 
 
 \subsubsection{Tests}
@@ -247,8 +257,46 @@ Afterwards, we perform a regular Proportionality Test with 100 trials on graphs 
 And finally, we do a tests that show us how the connectivity falls off based on, same as in Experiment 1, $V$ nodes and $V$ edges. 
 The graph size will be 1000 nodes. The maximum number of edges will be 100\% of the number of nodes (1000 edges); doing only the edges that are a multiple of 5. We do 100 trials per edge count.
 
-
 \subsubsection{Proportionality Test Results and Conclusions}
+
+\FloatBarrier{}
+\firgureBuffered{images/experiment2/a.png}{The Number of Random Edges vs Percentage of Connected 5 Node Graphs out of 1000}
+\firgureBuffered{images/experiment2/b.png}{The Number of Random Edges vs Percentage of Connected 10 Node Graphs out of 1000}
+\firgureBuffered{images/experiment2/c.png}{The Number of Random Edges vs Percentage of Connected 30 Node Graphs out of 1000}
+\FloatBarrier{}
+
+To come up with an equation, we think about how we can create a connected graph, or rather, at what edge case the graph would have to be in order for it to still be NOT connected.
+
+Imagine a graph with every possible edge added to it. We have already stated that the number of edges
+\begin{center}
+    $E = \frac{V^2 + V}{2}$
+\end{center}
+
+Now we think how to force the graph to be un connected. To do this, we pick some node and remove every connected to it. Since, in our graph, every
+node is connected to the other $V-1$ nodes, we can remove those $V-1$ connections.
+
+This leaves us with our final graph, where every node is connected to every other node, save for one extra that is only connected to itself (which does not impact connectivity).
+
+To force the graph to be connected, we just add one more edge to the isolated node, which must then, by our definition, connect the entire graph.
+
+Thus, our equation to find the amount of edges to force a connected node is
+\begin{center}
+    $E = \frac{V^2 + V}{2} - (V-1) + 1$
+    $E = \frac{V^2 - V}{2} + 2$
+\end{center}
+
+Looking at the edge count for the graph sizes we tested on, we get the following number of edges to force a connective graph
+
+\begin{itemize}
+    \item $E(5) = 12$ 
+    \item $E(10) = 47$ 
+    \item $E(30) = 437$ 
+\end{itemize}
+
+While we do get the correct number for a graph with 5 nodes, we do not get the correct number of edges for a graph of 10 or 30 nodes. This is most likely due to the fact that as we get higher and higher node counts, the
+amount of `permutations' of edge placements grows rapidly. To get results where the proportion of graphs being connected is always 1, we must not be creating enough random graphs to affect the results.
+
+This could be improved apon by perfoming many more trials, or by actually creating each `permutation' of the graph and checking how many are connected.
 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
