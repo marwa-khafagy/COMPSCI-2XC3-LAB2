@@ -89,7 +89,7 @@
 
 To squeeze some performance out of the Graph class, especially at larger scales, we do some optimizations.
 
-Firstly, when adding an edge to a node, if we are adding a self-loop, then we only add that to the list once.
+Firstly, when adding an edge to a node, if we are adding a self-loop, then we only add that to the list once. This of course means that we assume we are working with self-loops.
 
 The next improvement is memorizing the nodes that contain edges. When we add a node, we mark it in a dictionary as `marked'--IE, we store that this node has an edge on it.
 
@@ -198,7 +198,7 @@ What we can conclude is that if we have a graph with $V$ nodes and $V$ edges, we
 
 What we can conclude here is very similar to the conclusions we made in the proportionality tests.
 
-If we look at the minimum number of edges need to be added to create a cycle, we see that it stays constant at 1. This is very easy to explain, the edge we added connected some node to itself.
+If we look at the minimum number of edges need to be added to create a cycle, we see that it stays constant at 1. This is very easy to explain, the edge we added connected some node to itself. This is ofcourse able because we assume we are working with graphs that can contain self loops.
 
 If we look at the maximum number of edges needed to be added to create a cycle, we see that it tends to be close but also exactly at $V$. If we look at Test 6, we see that, for x <= 20, x = y; meaning the number of nodes is equal to the number of edges. When we go above, the number of edges added is once again below the node count, as in the 1000 trials, we never create a graph with a cycle as described by graph $G^{*}$ above. Again, had we created every single possible graph with $V$ nodes, we would have seen that this number sticks exactly to x=y.
 
@@ -259,6 +259,13 @@ Finally, a Proportionality Test*, on 1000 trials on graphs with 30 nodes.
 \firgureBuffered{images/experiment2/b.png}{The Number of Random Edges vs Percentage of Connected 10 Node Graphs out of 1000}
 \firgureBuffered{images/experiment2/c.png}{The Number of Random Edges vs Percentage of Connected 30 Node Graphs out of 1000}
 \FloatBarrier{}
+
+First, we can see that in all three graphs, the proportion of graphs that are connected stay at 0 until number of edges matches the number of nodes, minus 1.
+This is especially noticeable in the graph of node counts of 5, where the first data point comes at $x=4$.
+
+The reason this occurs is clear if we imagine a cyclical graph $G^{*}$, just as we did above in experiment 1. This graph is obviously connected. If we end up removing one edge from this cycle, the graph still remians connected.
+This is the best case for connectivity, which explains why $x=4$ has a relativley small proportionality of connected graphs.
+
 
 To come up with an equation, we think about how we can create a connected graph, or rather, at what edge case the graph would have to be in order for it to still be NOT connected.
 
@@ -422,7 +429,7 @@ All the actual tests performed are outlined at the bottom on experiment2.py.
 
 \subsubsection{Experiment 2}
 \begin{itemize}
-    \item The smallest number of edges needed to force a cycle to be connected would be obviously $V$ (best case, where we create one large cycle).
+    \item The smallest number of edges needed to force a cycle to be connected would be obviously $V-1$ (best case, where we create one large cycle, save for one edge).
     \item It would require at most $\frac{V^2 - V}{2} + 2$ number of edges added to force a cycle to be connected in a graph (worst case) 
   \end{itemize}
 
