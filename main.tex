@@ -290,7 +290,7 @@ Looking at the edge count for the graph sizes we tested on, we get the following
 While we do get the correct number for a graph with 5 nodes, we do not get the correct number of edges for a graph of 10 or 30 nodes. This is most likely due to the fact that as we get higher and higher node counts, the
 amount of `permutations' of edge placements grows rapidly. To get results where the proportion of graphs being connected is always 1, we must not be creating enough random graphs to affect the results.
 
-This could be improved apon by perfoming many more trials, or by actually creating each `permutation' of the graph and checking how many are connected.
+This could be improved upon by performing many more trials, or by actually creating each `permutation' of the graph and checking how many are connected.
 
 %=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 %
@@ -376,7 +376,7 @@ Through the second test we found that the complement of MVC has the same cardina
 
 Through the third test we found that the complement of MIS has the same cardinality of a MVC, and is a vertex cover.
 
-In conclusion, these three tests show empircally that the complement of a MVC is a MIS, and vise versa. Thus, given a MIS, 
+In conclusion, these three tests show empirically that the complement of a MVC is a MIS, and vise versa. Thus, given a MIS, 
 one can find a MIS (and vise versa). We also note that there may exists more than one MIS/MVC for a given graph, so checking 
 to see if the complement of MVC is equal to a given MIS may return false. 
 
